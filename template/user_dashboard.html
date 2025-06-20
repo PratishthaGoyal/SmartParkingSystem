@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>User Dashboard</title>
+
+  <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(-45deg, black, white, black, black);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: white;
+      text-align: center;
+      padding-top: 60px;
+      margin: 0;
+    }
+    
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .dashboard {
+      background: rgba(255, 255, 255, 0.1);
+      margin: 0 auto;
+      padding: 60px;
+      border-radius: 16px;
+      width: 95%;
+      max-width: 800px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.5);
+    }
+
+    h2 {
+      margin-bottom: 35px;
+      font-size: 26px;
+      color: #f1c40f;
+    }
+
+    p {
+      font-size: 18px;
+      margin: 12px 0;
+    }
+
+    .highlight {
+      font-size: 32px;
+      font-weight: bold;
+      color: #00cec9;
+      margin-bottom: 25px;
+    }
+
+    button {
+      background-color: #f1c40f;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      color: #333;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    button:hover {
+      background-color: #f39c12;
+    }
+
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 25px;
+      align-items: center;
+    }
+
+    #graph {
+      width: 100%;
+      height: 400px;
+      margin-top: 40px;
+      background: white;
+      border-radius: 8px;
+    }
+
+    .top-buttons {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .top-buttons a {
+      text-decoration: none;
+      padding: 10px 25px;
+      background-color: #f39c12;
+      color: white;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      white-space: nowrap;
+    }
+
+    .top-buttons a:hover {
+      background-color: #e67e22;
+    }
+
+    @media (max-width: 500px) {
+      .top-buttons {
+        top: 10px;
+        right: 10px;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 10px;
+      }
+
+      .top-buttons a {
+        padding: 8px 16px;
+        font-size: 14px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  
+  <div class="top-buttons">
+    <a href="/">Home</a>
+    <a href="/layoutview">Parking Layout</a>
+  </div>
+
+  <div class="dashboard">
+    <div class="highlight">Welcome, {{ plate }}</div>
+    <p><strong>Entry Time:</strong> {{ entry_time }}</p>
+    <p><strong>Allocated Slot:</strong> {{ slot }}</p>
+    <p><strong>Parking Path:</strong> {{ path }}</p>
+    <p><strong>Total Bill:</strong> ₹{{ bill }}</p>
+
+    <div class="button-group">
+      <form action="{{ url_for('camera_page') }}" method="get">
+        <button type="submit" style="margin-top: 20px;">Scan Another Vehicle</button>
+      </form>
+
+      <form action="{{ url_for('show_path_graph') }}" method="post" target="_blank">
+        <input type="hidden" name="path" value="{{ path }}">
+        <button type="submit">Show Fullscreen Parking Path</button>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

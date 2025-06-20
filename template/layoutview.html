@@ -1,0 +1,36 @@
+<!-- layoutview.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Parking Graph Layout</title>
+  <style>
+    body {
+      background-color: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+    }
+    img {
+      max-width: 90%;
+      border: 3px solid #f39c12;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(243, 156, 18, 0.5);
+    }
+    a {
+      color: #f1c40f;
+      margin-top: 20px;
+      display: inline-block;
+      font-size: 1.2rem;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Parking Graph Layout</h1>
+  <img src="{{ url_for('static', filename='images/layout.png') }}" alt="Parking Layout Image" />
+  <br>
+  <a href="/">← Back to Dashboard</a>
+</body>
+</html>
