@@ -146,9 +146,6 @@ int main(int argc, char* argv[]) {
     set<string> alreadyAllocated = getAllocatedSlots("slots.txt");
 
     vector<pair<int, string>> slots;
-            // for (char r : rows)
-            //     for (int i = 1; i <= slotsPerRow; i++)
-            //         slots.push_back({dist[g.getNodeId(string(1, r) + to_string(i))], g.getNodeId(string(1, r) + to_string(i))});
     for (char r : rows) {
         string row1 = string(1, r) + "1";
         int row1Id = g.getNodeId(row1);
@@ -167,24 +164,8 @@ int main(int argc, char* argv[]) {
     }
     sort(slots.begin(), slots.end());
 
-    // string finalSlotName = "";
-    // for (auto& p : slots) {
-    //     if (alreadyAllocated.find(p.second) == alreadyAllocated.end()) {
-    //         finalSlotName = p.second;
-    //         break;
-    //     }
-    // }
-
-    //  if (finalSlotName == "") {
-    //     cout << "{ \"error\": \"No slots available\" }" << endl;
-    //     return 1;
-    // }
-
-    // saveAllocation("C:\\Users\\Gaurav Negi\\Desktop\\aa\\frontparking\\number_plate_detection\\slots.txt", plate, finalSlotName);
-    
     string finalSlotName = "";
 
-// 🧠 First, check if plate already has a slot assigned
 ifstream checkFile("slots.txt");
 string existingPlate, existingSlot;
 bool alreadyExists = false;
@@ -198,7 +179,6 @@ while (checkFile >> existingPlate >> existingSlot) {
 }
 checkFile.close();
 
-// ✅ If not already assigned, find new available slot
 if (!alreadyExists) {
     for (auto& p : slots) {
         if (alreadyAllocated.find(p.second) == alreadyAllocated.end()) {
@@ -215,8 +195,6 @@ if (!alreadyExists) {
     saveAllocation("slots.txt", plate, finalSlotName);
 }
 
-    // set<string> alreadyAllocated = getAllocatedSlots("slots.txt");
-
     char r = finalSlotName[0];
     int slotNum = stoi(finalSlotName.substr(1));
     int row1Id = g.getNodeId(string(1, r) + "1");
@@ -227,34 +205,6 @@ if (!alreadyExists) {
     vector<int> pathEntryToRow1 = g.reconstructPath(row1Id, parent);
     g.dijkstra(row1Id, dist, parent);
     vector<int> pathRow1ToSlot = g.reconstructPath(slotId, parent);
-
-// int slot = -1;
-// string slotName;
-// for (auto &p : slots) {
-//     slotName = g.getNodeName(p.second);
-//     if (alreadyAllocated.find(slotName) == alreadyAllocated.end()) {
-//         slot = p.second;
-//         break;
-//     }
-// }
-
-// if (slot == -1) {
-//     cout << "{ \"error\": \"No slots available\" }" << endl;
-//     return 1;
-// }
-
-// Save the allocation
-// saveAllocation("slots.txt", plate, slotName);
-//     char r = slotName[0];
-//     int slotNum = stoi(slotName.substr(1));
-
-//     int row1Id = g.getNodeId(string(1, r) + "1");
-//     int exitId = g.getNodeId("Exit");
-
-//     g.dijkstra(entryId, dist, parent);
-//     vector<int> pathEntryToRow1 = g.reconstructPath(row1Id, parent);
-//     g.dijkstra(row1Id, dist, parent);
-//     vector<int> pathRow1ToSlot = g.reconstructPath(slot, parent);
 
     vector<int> fullPath;
     fullPath.insert(fullPath.end(), pathEntryToRow1.begin(), pathEntryToRow1.end() - 1);
@@ -270,7 +220,6 @@ if (!alreadyExists) {
     }
 
     fullPath.push_back(exitId);
-
     
     cout << "{ \"plate\": \"" << plate << "\", \"slot\": \"" << finalSlotName << "\", \"path\": [";
     for (size_t i = 0; i < fullPath.size(); i++) {
