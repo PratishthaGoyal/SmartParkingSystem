@@ -28,18 +28,7 @@ An intelligent and optimized parking system that uses Computer Vision, C++, and 
 
 ## Project Structure
 
-SmartParkingSystem/
-│
-├── app.py # Flask main app
-├── number_plate.py # Vehicle detection logic
-├── parking.cpp # C++ slot allocation logic
-├── templates/ # HTML templates
-├── static/ # CSS, videos, layout image
-├── plates/plate_img/ # Saved captured images
-├── slots.txt # Slot data
-├── vehicle_logs.csv # Vehicle entry logs
-└── requirements.txt # Python dependencies
-
+<pre> ## Project Structure ``` SmartParkingSystem/ │ ├── app.py # Flask main app ├── number_plate.py # Vehicle detection logic ├── parking.cpp # C++ slot allocation logic ├── templates/ # HTML templates ├── static/ # CSS, videos, layout image ├── plates/plate_img/ # Saved captured images ├── slots.txt # Slot data ├── vehicle_logs.csv # Vehicle entry logs └── requirements.txt # Python dependencies ``` </pre>
 
 ---
 
