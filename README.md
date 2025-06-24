@@ -61,6 +61,8 @@ SmartParkingSystem/
    git clone https://github.com/AnushkaNegi27/SmartParkingSystem.git
    cd SmartParkingSystem
 2. Install dependencies:
+   ```bash
    pip install -r requirements.txt
-3. Run the app:
+4. Run the app:
+   ```bash
    python app.py
